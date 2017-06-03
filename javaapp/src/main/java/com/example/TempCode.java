@@ -26,6 +26,14 @@ public interface TempCode {
     String CONTRACT_METHOD_PRESENTER = "        void request%1$s(%2$s);\n";
     String CONTRACT_METHOD_MODEL = "        Observable(%3$s) request%1$s(%2$s);\n";
 
+    //---------------------- api -----------------------
+    String API = "\tString request%1$s = \"%2$s\";\n" +
+            " \t@FormUrlEncoded\n" +
+            "    @POST\n" +
+            "    Observable<%3$s> request%1$s(\n" +
+            "            @Url String url\n" +
+            "%4$s    );\n";
+    String API_PARAMS = "            ,@Field(\"%1$s\") String %1$s\n";
 
     //---------------------- model -----------------------
 

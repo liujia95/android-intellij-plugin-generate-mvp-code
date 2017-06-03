@@ -11,9 +11,9 @@ public class ConfigBean {
 
 
     /**
-     * kw_class_name : Home
-     * kw_method_name_list : [{"name":"Banners","return_type":"BannerBean","params_type":"Params","params_list":[{"name":"token"},{"name":"fid"},{"name":"city"}]},{"name":"Notice","return_type":"BaseBean","params_type":"Params","params_list":[]}]
-     * fragment_layout : fragment_home
+     * kw_class_name : 类名关键字
+     * kw_method_name_list : [{"name":"函数名关键字","return_type":"返回值","params_type":"参数类型","view_params_type":"响应返回类型","url":"url路径","url_params":[{"name":"参数名字"}]}]
+     * fragment_layout : fragment的布局文件名
      */
 
     private String kw_class_name;
@@ -46,16 +46,20 @@ public class ConfigBean {
 
     public static class KwMethodNameListBean {
         /**
-         * name : Banners
-         * return_type : BannerBean
-         * params_type : Params
-         * params_list : [{"name":"token"},{"name":"fid"},{"name":"city"}]
+         * name : 函数名关键字
+         * return_type : 返回值
+         * params_type : 参数类型
+         * view_params_type : 响应返回类型
+         * url : url路径
+         * url_params : [{"name":"参数名字"}]
          */
 
         private String name;
         private String return_type;
         private String params_type;
-        private List<ParamsListBean> params_list;
+        private String view_params_type;
+        private String url;
+        private List<UrlParamsBean> url_params;
 
         public String getName() {
             return name;
@@ -81,17 +85,33 @@ public class ConfigBean {
             this.params_type = params_type;
         }
 
-        public List<ParamsListBean> getParams_list() {
-            return params_list;
+        public String getView_params_type() {
+            return view_params_type;
         }
 
-        public void setParams_list(List<ParamsListBean> params_list) {
-            this.params_list = params_list;
+        public void setView_params_type(String view_params_type) {
+            this.view_params_type = view_params_type;
         }
 
-        public static class ParamsListBean {
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public List<UrlParamsBean> getUrl_params() {
+            return url_params;
+        }
+
+        public void setUrl_params(List<UrlParamsBean> url_params) {
+            this.url_params = url_params;
+        }
+
+        public static class UrlParamsBean {
             /**
-             * name : token
+             * name : 参数名字
              */
 
             private String name;
