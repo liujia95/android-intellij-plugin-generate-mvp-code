@@ -1,6 +1,6 @@
 # Android base on MVP code generation
 ## Installation:
-0. Download [release](https://github.com/nekocode/android-parcelable-intellij-plugin-kotlin/releases).
+0. Download [release](https://github.com/liujia95/android-intellij-plugin-generate-mvp-code/releases).
 0. Open IntelliJ/Android Studio.
 0. *Preferences* -> *Plugins* -> *Install plugin from disk...*.
 
