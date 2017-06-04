@@ -1,9 +1,13 @@
 # Android base on MVP code generation
-## 安装:
+## Installation:
+0. Download [release](https://github.com/nekocode/android-parcelable-intellij-plugin-kotlin/releases).
+0. Open IntelliJ/Android Studio.
+0. *Preferences* -> *Plugins* -> *Install plugin from disk...*.
 
-## 使用:
-1.点击Android Studio下的Code菜单 ——> 选择单击MVP Code。
-配置json格式。
+## Usage:
+0. Click Android Studio [Code] Menu ——> Click [MVP Code].
+0. Config json file.
+**json format:**
  ```json
   {
      "kw_class_name":"类名关键字",
