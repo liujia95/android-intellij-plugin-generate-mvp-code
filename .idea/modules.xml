@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AgCode.iml" filepath="$PROJECT_DIR$/AgCode.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javaapp/javaapp.iml" filepath="$PROJECT_DIR$/javaapp/javaapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GenerateMVPCode.iml" filepath="$PROJECT_DIR$/GenerateMVPCode.iml" />
     </modules>
   </component>
 </project>
