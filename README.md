@@ -6,7 +6,8 @@
 
 ## Usage:
 0. Click Android Studio [Code] Menu ——> Click [MVP Code].
-0. Config json file.
+0. Config json file.  
+
 **json format:**
  ```json
   {
