@@ -30,10 +30,11 @@
 
   <actions>
     <!-- Add your actions here -->
-    <action id="GenerateMVPCode.MVPCodeAction" class="me.liujia95.MVPCodeAction" text="MVPCode"
-            description="generate Mvp code">
-      <add-to-group group-id="CodeMenu" anchor="first"/>
-      <keyboard-shortcut keymap="$default" first-keystroke="ctrl T"/>
+
+    <action id="GenerateMVPCode.GenerateMVPAction" class="me.liujia95.GenerateMVPAction" text="Generate MVP Code"
+            description="Generate MVP Code">
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="after"
+                    relative-to-action="ProjectViewPopupMenuRefactoringGroup"/>
     </action>
   </actions>
 

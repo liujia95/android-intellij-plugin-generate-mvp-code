@@ -7,7 +7,10 @@ package me.liujia95;
 
 public interface TempAdapterCode {
 
-    String ADAPTER = "public class %1$sVAdapter extends BaseRecyclerViewAdapter</*todo:*/, BaseViewHolder> {\n" +
+    //%1$s：类名关键字
+    //%2$s：包路径
+    String ADAPTER = "package %2$s;\n\n"+
+            "public class %1$sRVAdapter extends BaseRecyclerViewAdapter</*todo:*/, BaseViewHolder> {\n" +
             "\n" +
             "    public %1$sRVAdapter() {\n" +
             "        super(R.layout./*todo:*/);\n" +

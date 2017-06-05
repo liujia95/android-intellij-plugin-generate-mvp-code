@@ -8,7 +8,9 @@ package me.liujia95;
 public interface TempCode {
 
     //---------------------- contract -----------------------
-    String CONTRACT = "public interface %1$sContract { \n" +
+    //%5$s：包路径
+    String CONTRACT = "package %5$s;\n\n"+
+            "public interface %1$sContract { \n" +
             "\n" +
             "    interface View extends BaseContract.View {\n" +
             "%2$s" +
@@ -36,8 +38,9 @@ public interface TempCode {
     String API_PARAMS = "            ,@Field(\"%1$s\") String %1$s\n";
 
     //---------------------- model -----------------------
-
-    String MODEL ="public class %1$sModel extends BaseModel implements %1$sContract.Model {\n" +
+    //%3$s：包路径
+    String MODEL = "package %3$s;\n\n"+
+            "public class %1$sModel extends BaseModel implements %1$sContract.Model {\n" +
             "    @Override\n" +
             "    public void start(Object request) {\n" +
             "\n" +
@@ -53,7 +56,9 @@ public interface TempCode {
             "    }\n";
 
     //---------------------- presenter -----------------------
-    String PRESENTER = "public class %1$sPresenter extends BasePresenter<%1$sContract.View, %1$sContract.Model> implements %1$sContract.Presenter {\n" +
+    //%3$s：包路径
+    String PRESENTER ="package %3$s;\n\n"+
+            "public class %1$sPresenter extends BasePresenter<%1$sContract.View, %1$sContract.Model> implements %1$sContract.Presenter {\n" +
             "    private final String TAG = %1$sPresenter.class.getSimpleName();\n" +
             "\n" +
             "    public %1$sPresenter(%1$sContract.View mView) {\n" +
@@ -87,7 +92,9 @@ public interface TempCode {
             "    }\n";
 
     //---------------------- fragment -----------------------
-    String FRAGMENT = "public class %1$sFragment extends BaseFragment<%1$sContract.Presenter> implements %1$sContract.View {\n" +
+    //%7$s：包路径
+    String FRAGMENT = "package %7$s;\n\n"+
+            "public class %1$sFragment extends BaseFragment<%1$sContract.Presenter> implements %1$sContract.View {\n" +
             "    \n" +
             "    public static final String TAG = %1$sFragment.class.getSimpleName();\n" +
             "    \n" +

@@ -3,15 +3,24 @@ package me.liujia95;
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 
 public class GenerateMvpCode {
 //{"kw_class_name":"Home","kw_method_name_list":[{"name":"Banners","return_type":"BannerBean","params_type":"Params","url":"http://www.aglhz.com:8090/sub_property_ysq/neighbor/activity/to-client/activity-list","url_params":[{"name":"pageSize"},{"name":"page"},{"name":"keywords"},{"name":"cmnt_c"}]},{"name":"Notice","return_type":"BaseBean","params_type":"Params","url":"http://www.aglhz.com:8090/sub_property_ysq/neighbor/activity/to-client/activity-list","url_params":[{"name":"pageSize"},{"name":"page"},{"name":"keywords"},{"name":"cmnt_c"}]}],"fragment_layout":"fragment_home","fragment_type":"1"}
     static ConfigBean bean;
 
-    static String ROOT_PATH = "F:\\gaocheng\\code\\auto\\";
+    static String root_path = "F:\\gaocheng\\code\\auto\\";
+    private static String packageStr;
 
-    public static void execute(String json) {
+    public static void execute(String json,String path) {
+        root_path = path;
+
+        try {
+            packageStr = path.substring(path.indexOf("java/")+("java/").length()).replace("/",".");
+        }catch (Exception e){
+        }
+
         bean = formatJson(json);
         String c_moethView = "";
         String c_moethPresenter = "";
@@ -60,23 +69,23 @@ public class GenerateMvpCode {
         }
         System.out.print("-------------------- contract -----------------------\n");
         String contentStr = String.format(TempCode.CONTRACT,
-                bean.getKw_class_name(), c_moethView, c_moethPresenter, c_moethModel);
+                bean.getKw_class_name(), c_moethView, c_moethPresenter, c_moethModel, packageStr +".contract");
         System.out.print(contentStr);
-        writeToFile(ROOT_PATH + bean.getKw_class_name() + "Contract.java", contentStr);
+        writeToFile(root_path +"\\contract\\"  ,bean.getKw_class_name() + "Contract.java", contentStr);
 
         System.out.print("-------------------- api -----------------------\n");
         System.out.print(api_method);
-        writeToFile(ROOT_PATH + "ApiService.java", api_method);
+        writeToFile(root_path  , "\\ApiService.java", api_method);
 
         System.out.print("---------------------- model ------------------------\n");
-        contentStr = String.format(TempCode.MODEL, bean.getKw_class_name(), m_mothod);
+        contentStr = String.format(TempCode.MODEL, bean.getKw_class_name(), m_mothod, packageStr +".model");
         System.out.print(contentStr);
-        writeToFile(ROOT_PATH + bean.getKw_class_name() + "Model.java", contentStr);
+        writeToFile(root_path +"\\model\\"  , bean.getKw_class_name() + "Model.java", contentStr);
 
         System.out.print("-------------------- presenter ----------------------\n");
-        contentStr = String.format(TempCode.PRESENTER, bean.getKw_class_name(), p_mothod);
+        contentStr = String.format(TempCode.PRESENTER, bean.getKw_class_name(), p_mothod, packageStr +".presenter");
         System.out.print(contentStr);
-        writeToFile(ROOT_PATH + bean.getKw_class_name() + "Presenter.java", contentStr);
+        writeToFile(root_path + "\\presenter\\"  ,bean.getKw_class_name() + "Presenter.java", contentStr);
 
         System.out.print("-------------------- fragment ----------------------\n");
 
@@ -98,14 +107,15 @@ public class GenerateMvpCode {
                 f_mothod,
                 rv_create_view,
                 rv_init,
-                rv_error);
+                rv_error,
+                packageStr +".fragment");
         System.out.print(contentStr);
-        writeToFile(ROOT_PATH + bean.getKw_class_name() + "Fragment.java", contentStr);
+        writeToFile(root_path + "\\fragment\\" ,bean.getKw_class_name() + "Fragment.java", contentStr);
     }
 
     private static void createAdapterFile() {
-        String contentStr = String.format(TempAdapterCode.ADAPTER,bean.getKw_class_name());
-        writeToFile(ROOT_PATH + bean.getKw_class_name() + "RVAdapter.java", contentStr);
+        String contentStr = String.format(TempAdapterCode.ADAPTER,bean.getKw_class_name(),packageStr+".fragment");
+        writeToFile(root_path +"\\fragment\\", bean.getKw_class_name() + "RVAdapter.java", contentStr);
     }
 
     private static ConfigBean formatJson(String json) {
@@ -113,9 +123,13 @@ public class GenerateMvpCode {
         return gson.fromJson(json, ConfigBean.class);
     }
 
-    private static void writeToFile(String fileName, String content) {
+    private static void writeToFile(String filePath,String fileName, String content) {
         try {
-            FileWriter fw = new FileWriter(fileName, true);
+            File file = new File(filePath);
+            if(!file.exists()){
+                file.mkdirs();
+            }
+            FileWriter fw = new FileWriter(new File(filePath+fileName), true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(content);
             bw.close();

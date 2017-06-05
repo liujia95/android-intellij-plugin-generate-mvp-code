@@ -9,7 +9,9 @@ public class GenerateCodeDialog extends JDialog {
     private JButton buttonCancel;
     private JTextField TextField;
 
-    public GenerateCodeDialog() {
+    public GenerateCodeDialog(){}
+
+    public GenerateCodeDialog(String path) {
         setContentPane(contentPane);
         setModal(true);
         setBounds(200,200,400,300);
@@ -17,7 +19,7 @@ public class GenerateCodeDialog extends JDialog {
 
         buttonOK.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                onOK();
+                onOK(path);
             }
         });
 
@@ -43,10 +45,10 @@ public class GenerateCodeDialog extends JDialog {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
-    private void onOK() {
+    private void onOK(String path) {
         // add your code here
         String json = TextField.getText();
-        GenerateMvpCode.execute(json);
+        GenerateMvpCode.execute(json,path);
         dispose();
     }
 
