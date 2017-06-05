@@ -108,14 +108,14 @@ public class GenerateMvpCode {
                 rv_create_view,
                 rv_init,
                 rv_error,
-                packageStr +".fragment");
+                packageStr +".view");
         System.out.print(contentStr);
-        writeToFile(root_path + "\\fragment\\" ,bean.getKw_class_name() + "Fragment.java", contentStr);
+        writeToFile(root_path + "\\view\\" ,bean.getKw_class_name() + "Fragment.java", contentStr);
     }
 
     private static void createAdapterFile() {
-        String contentStr = String.format(TempAdapterCode.ADAPTER,bean.getKw_class_name(),packageStr+".fragment");
-        writeToFile(root_path +"\\fragment\\", bean.getKw_class_name() + "RVAdapter.java", contentStr);
+        String contentStr = String.format(TempAdapterCode.ADAPTER,bean.getKw_class_name(),packageStr+".view");
+        writeToFile(root_path +"\\view\\", bean.getKw_class_name() + "RVAdapter.java", contentStr);
     }
 
     private static ConfigBean formatJson(String json) {

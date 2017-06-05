@@ -10,6 +10,7 @@ public interface TempCode {
     //---------------------- contract -----------------------
     //%5$s：包路径
     String CONTRACT = "package %5$s;\n\n"+
+            "import io.reactivex.Observable;\n"+
             "public interface %1$sContract { \n" +
             "\n" +
             "    interface View extends BaseContract.View {\n" +
@@ -40,6 +41,7 @@ public interface TempCode {
     //---------------------- model -----------------------
     //%3$s：包路径
     String MODEL = "package %3$s;\n\n"+
+            "import io.reactivex.Observable;\nimport io.reactivex.schedulers.Schedulers;\n\n"+
             "public class %1$sModel extends BaseModel implements %1$sContract.Model {\n" +
             "    @Override\n" +
             "    public void start(Object request) {\n" +
@@ -58,6 +60,8 @@ public interface TempCode {
     //---------------------- presenter -----------------------
     //%3$s：包路径
     String PRESENTER ="package %3$s;\n\n"+
+            "import android.support.annotation.NonNull;\n"+
+            "import io.reactivex.android.schedulers.AndroidSchedulers;\n"+
             "public class %1$sPresenter extends BasePresenter<%1$sContract.View, %1$sContract.Model> implements %1$sContract.Presenter {\n" +
             "    private final String TAG = %1$sPresenter.class.getSimpleName();\n" +
             "\n" +
@@ -94,6 +98,17 @@ public interface TempCode {
     //---------------------- fragment -----------------------
     //%7$s：包路径
     String FRAGMENT = "package %7$s;\n\n"+
+            "import android.os.Bundle;\n" +
+            "import android.support.annotation.NonNull;\n" +
+            "import android.support.annotation.Nullable;\n" +
+            "import android.support.v7.widget.Toolbar;\n" +
+            "import android.view.LayoutInflater;\n" +
+            "import android.view.View;\n" +
+            "import android.view.ViewGroup;\n" +
+            "import android.widget.TextView;\n\n"+
+            "import butterknife.BindView;\n" +
+            "import butterknife.ButterKnife;\n" +
+            "import butterknife.Unbinder;\n\n"+
             "public class %1$sFragment extends BaseFragment<%1$sContract.Presenter> implements %1$sContract.View {\n" +
             "    \n" +
             "    public static final String TAG = %1$sFragment.class.getSimpleName();\n" +
