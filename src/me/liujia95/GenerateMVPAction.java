@@ -32,6 +32,8 @@ public class GenerateMVPAction extends AnAction {
 //            }
 //        }
         GenerateCodeDialog dialog = new GenerateCodeDialog(selectedFile.getPath());
+        dialog.setSize(800, 720);
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
 

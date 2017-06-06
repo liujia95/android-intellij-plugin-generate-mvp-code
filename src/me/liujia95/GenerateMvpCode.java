@@ -1,6 +1,7 @@
 package me.liujia95;
 
 import com.google.gson.Gson;
+import com.intellij.ide.util.PropertiesComponent;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,15 +14,17 @@ public class GenerateMvpCode {
     static String root_path = "F:\\gaocheng\\code\\auto\\";
     private static String packageStr;
 
-    public static void execute(String json,String path) {
+    public static void execute(String json,String path,OptionsBean options) {
         root_path = path;
-
         try {
             packageStr = path.substring(path.indexOf("java/")+("java/").length()).replace("/",".");
         }catch (Exception e){
         }
 
         bean = formatJson(json);
+        bean.setKw_class_name(options.kwClassName);
+        bean.setFragment_layout(options.layoutName);
+
         String c_moethView = "";
         String c_moethPresenter = "";
         String c_moethModel = "";
@@ -68,49 +71,58 @@ public class GenerateMvpCode {
 
         }
         System.out.print("-------------------- contract -----------------------\n");
-        String contentStr = String.format(TempCode.CONTRACT,
-                bean.getKw_class_name(), c_moethView, c_moethPresenter, c_moethModel, packageStr +".contract");
-        System.out.print(contentStr);
-        writeToFile(root_path +"\\contract\\"  ,bean.getKw_class_name() + "Contract.java", contentStr);
+        String contentStr = "";
+        if(options.hasContract){
+            contentStr = String.format(TempCode.CONTRACT,
+                    bean.getKw_class_name(), c_moethView, c_moethPresenter, c_moethModel, packageStr +".contract");
+            System.out.print(contentStr);
+            writeToFile(root_path +"\\contract\\"  ,bean.getKw_class_name() + "Contract.java", contentStr);
+        }
 
         System.out.print("-------------------- api -----------------------\n");
         System.out.print(api_method);
-        writeToFile(root_path  , "\\ApiService.java", api_method);
-
-        System.out.print("---------------------- model ------------------------\n");
-        contentStr = String.format(TempCode.MODEL, bean.getKw_class_name(), m_mothod, packageStr +".model");
-        System.out.print(contentStr);
-        writeToFile(root_path +"\\model\\"  , bean.getKw_class_name() + "Model.java", contentStr);
-
-        System.out.print("-------------------- presenter ----------------------\n");
-        contentStr = String.format(TempCode.PRESENTER, bean.getKw_class_name(), p_mothod, packageStr +".presenter");
-        System.out.print(contentStr);
-        writeToFile(root_path + "\\presenter\\"  ,bean.getKw_class_name() + "Presenter.java", contentStr);
-
-        System.out.print("-------------------- fragment ----------------------\n");
-
-        String rv_create_view="";
-        String rv_init="";
-        String rv_error="";
-        switch (bean.getFragment_type()){
-            case "1":
-                createAdapterFile();
-                rv_create_view =String.format(TempRvCode.CREATE_VIEW,bean.getKw_class_name());
-                rv_init = String.format(TempRvCode.INIT,bean.getKw_class_name());
-                rv_error = TempRvCode.ERROR;
-                break;
+        if(options.hasApi){
+            writeToFile(root_path  , "\\ApiService.java", api_method);
         }
 
-        contentStr = String.format(TempCode.FRAGMENT,
-                bean.getKw_class_name(),
-                bean.getFragment_layout(),
-                f_mothod,
-                rv_create_view,
-                rv_init,
-                rv_error,
-                packageStr +".view");
-        System.out.print(contentStr);
-        writeToFile(root_path + "\\view\\" ,bean.getKw_class_name() + "Fragment.java", contentStr);
+        System.out.print("---------------------- model ------------------------\n");
+        if(options.hasModel){
+            contentStr = String.format(TempCode.MODEL, bean.getKw_class_name(), m_mothod, packageStr +".model");
+            System.out.print(contentStr);
+            writeToFile(root_path +"\\model\\"  , bean.getKw_class_name() + "Model.java", contentStr);
+        }
+        System.out.print("-------------------- presenter ----------------------\n");
+        if(options.hasPresenter){
+            contentStr = String.format(TempCode.PRESENTER, bean.getKw_class_name(), p_mothod, packageStr +".presenter");
+            System.out.print(contentStr);
+            writeToFile(root_path + "\\presenter\\"  ,bean.getKw_class_name() + "Presenter.java", contentStr);
+        }
+
+        System.out.print("-------------------- fragment ----------------------\n");
+        if(options.hasFragment){
+            String rv_create_view="";
+            String rv_init="";
+            String rv_error="";
+            switch (bean.getFragment_type()){
+                case "1":
+                    createAdapterFile();
+                    rv_create_view =String.format(TempRvCode.CREATE_VIEW,bean.getKw_class_name());
+                    rv_init = String.format(TempRvCode.INIT,bean.getKw_class_name());
+                    rv_error = TempRvCode.ERROR;
+                    break;
+            }
+
+            contentStr = String.format(TempCode.FRAGMENT,
+                    bean.getKw_class_name(),
+                    bean.getFragment_layout(),
+                    f_mothod,
+                    rv_create_view,
+                    rv_init,
+                    rv_error,
+                    packageStr +".view");
+            System.out.print(contentStr);
+            writeToFile(root_path + "\\view\\" ,bean.getKw_class_name() + "Fragment.java", contentStr);
+        }
     }
 
     private static void createAdapterFile() {

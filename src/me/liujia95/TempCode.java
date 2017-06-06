@@ -27,7 +27,7 @@ public interface TempCode {
             "}";
     String CONTRACT_METHOD_VIEW = "        void response%1$s(%2$s);\n";
     String CONTRACT_METHOD_PRESENTER = "        void request%1$s(%2$s);\n";
-    String CONTRACT_METHOD_MODEL = "        Observable(%3$s) request%1$s(%2$s);\n";
+    String CONTRACT_METHOD_MODEL = "        Observable<%3$s> request%1$s(%2$s);\n";
 
     //---------------------- api -----------------------
     String API = "\tString request%1$s = \"%2$s\";\n" +
