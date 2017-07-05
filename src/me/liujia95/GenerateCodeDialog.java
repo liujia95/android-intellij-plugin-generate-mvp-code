@@ -1,6 +1,6 @@
 package me.liujia95;
 
-import org.apache.http.util.TextUtils;
+import me.liujia95.template.TJson;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -26,19 +26,8 @@ public class GenerateCodeDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
         this.setAlwaysOnTop(true);
-
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK(path);
-            }
-        });
-
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-
+        buttonOK.addActionListener(e -> onOK(path));
+        buttonCancel.addActionListener(e -> onCancel());
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -46,41 +35,23 @@ public class GenerateCodeDialog extends JDialog {
                 onCancel();
             }
         });
-
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        initData();
         initListener();
     }
 
+    private void initData() {
+        editTP.setText(TJson.TEMP);
+    }
+
     private void initListener() {
-//        formatBtn.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                String json = editTP.getText();
-//                json = json.trim();
-//                try{
-//                    if (json.startsWith("{")) {
-//                        JSONObject jsonObject = new JSONObject(json);
-//                        String formatJson = jsonObject.toString(4);
-//                        editTP.setText(formatJson);
-//                    } else if (json.startsWith("[")) {
-//                        JSONArray jsonArray = new JSONArray(json);
-//                        String formatJson = jsonArray.toString(4);
-//                        editTP.setText(formatJson);
-//                    }
-//                }catch (JSONException ex){
-//
-//                }
-//            }
-//        });
     }
 
     private void onOK(String path) {
         // add your code here
+
+        //获取配置信息
         String json = editTP.getText();
         OptionsBean options = new OptionsBean();
         options.hasContract = cbContract.isSelected();
@@ -89,13 +60,8 @@ public class GenerateCodeDialog extends JDialog {
         options.hasPresenter = cbPresenter.isSelected();
         options.hasApi = cbApi.isSelected();
         options.kwClassName = tfKwClassName.getText();
-        if(TextUtils.isEmpty(options.kwClassName)){
-            return;
-        }
         options.layoutName = tfLayoutName.getText();
-        if(options.hasFragment && TextUtils.isEmpty(options.kwClassName)){
-            return;
-        }
+        //开始执行代码生成
         GenerateMvpCode.execute(json,path,options);
         dispose();
     }

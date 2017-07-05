@@ -23,14 +23,15 @@ public class GenerateMVPAction extends AnAction {
         // TODO: insert action logic here
         VirtualFile selectedFile = DataKeys.VIRTUAL_FILE.getData(e.getDataContext());
 
-//        VirtualFile drawableFolder = selectedFile.getParent().findChild(Constants.EXPORT_FOLDER);
-//        if(drawableFolder==null || !drawableFolder.exists()){
-//            try {
-//                drawableFolder = selectedFile.getParent().createChildDirectory(null, Constants.EXPORT_FOLDER);
-//            } catch (IOException e1) {
-//                e1.printStackTrace();
-//            }
-//        }
+        System.out.println("e.getProject().getBasePath():"+e.getProject().getBasePath());
+        System.out.println("e.getProject().getName():"+e.getProject().getName());
+
+        System.out.println("selectedFile.getPath():"+selectedFile.getPath());
+        System.out.println("selectedFile.getName():"+selectedFile.getName());
+        System.out.println("selectedFile.getPresentableName():"+selectedFile.getPresentableName());
+        System.out.println("selectedFile.getPresentableUrl():"+selectedFile.getPresentableUrl());
+        System.out.println("selectedFile.getUrl():"+selectedFile.getUrl());
+
         GenerateCodeDialog dialog = new GenerateCodeDialog(selectedFile.getPath());
         dialog.setSize(800, 720);
         dialog.setLocationRelativeTo(null);

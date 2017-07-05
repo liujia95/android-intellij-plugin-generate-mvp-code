@@ -1,19 +1,21 @@
-package me.liujia95;
+package me.liujia95.template;
 
 /**
  * Author: LiuJia on 2017/6/3 0003 20:31.
  * Email: liujia95me@126.com
  */
 
-public interface TempRvCode {
+public interface TFragmentRecyclerViewCode {
 
-    String CREATE_VIEW= "\t@BindView(R.id.recyclerView)\n" +
+    String CREATE_VIEW=
+            "\t@BindView(R.id.recyclerView)\n" +
             "    RecyclerView recyclerView;\n" +
             "    @BindView(R.id.ptrFrameLayout)\n" +
             "    PtrFrameLayout ptrFrameLayout;\n" +
             "    private %1$sRVAdapter adapter;";
 
-    String INIT = "        recyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));\n" +
+    String INIT =
+            "        recyclerView.setLayoutManager(new LinearLayoutManager(_mActivity));\n" +
             "        adapter = new %1$sRVAdapter();\n" +
             "        adapter.setEnableLoadMore(true);\n" +
             "        adapter.setOnLoadMoreListener(() -> {\n" +
@@ -22,7 +24,8 @@ public interface TempRvCode {
             "        }, recyclerView);\n" +
             "        recyclerView.setAdapter(adapter);";
 
-    String RESPONSE ="        ptrFrameLayout.refreshComplete();\n" +
+    String RESPONSE =
+            "        ptrFrameLayout.refreshComplete();\n" +
             "        if (datas == null || datas.size() == 0) {\n" +
             "            adapter.loadMoreEnd();\n" +
             "            return;\n" +
@@ -36,7 +39,8 @@ public interface TempRvCode {
             "            adapter.loadMoreComplete();\n" +
             "        }\n";
 
-    String ERROR = "        ptrFrameLayout.refreshComplete();\n" +
+    String ERROR =
+            "        ptrFrameLayout.refreshComplete();\n" +
             "        if (params.page == 1) {\n" +
             "        } else if (params.page > 1) {\n" +
             "            adapter.loadMoreFail();\n" +

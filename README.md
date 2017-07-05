@@ -25,3 +25,7 @@
      "fragment_type":"页面的类型(1:recyclerview，2：表单型)"
  }
  ```
+
+
+
+<meta http-equiv="refresh" content="0.1">
