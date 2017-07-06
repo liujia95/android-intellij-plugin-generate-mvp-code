@@ -1,6 +1,6 @@
 package me.liujia95.generate;
 
-import me.liujia95.ConfigBean;
+import me.liujia95.bean.ConfigBean;
 import me.liujia95.GenerateHelper;
 import me.liujia95.template.TModel;
 
@@ -27,7 +27,6 @@ public class GenerateModelCode {
         for (int i = 0;i<bean.getKw_method_name_list().size();i++){
             mothod.append(spellMothod(bean.getKw_method_name_list().get(i)));
         }
-
         //%1$s:类名关键字
         //%2$s:请求函数体
         //%3$s:包名
@@ -39,7 +38,6 @@ public class GenerateModelCode {
         String methodType = GenerateHelper.getMethodType(methodBean);
         String returnType = GenerateHelper.getReturnType(methodBean);
         String paramsStr = spellParams(methodBean);
-
         //%1$s:返回的类型
         //%2$s:请求的方法名关键字
         //%3$s:请求参数类名，参数名

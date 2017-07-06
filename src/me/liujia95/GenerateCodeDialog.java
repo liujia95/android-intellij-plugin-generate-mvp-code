@@ -1,5 +1,6 @@
 package me.liujia95;
 
+import me.liujia95.bean.OptionsBean;
 import me.liujia95.template.TJson;
 
 import javax.swing.*;
@@ -9,14 +10,19 @@ public class GenerateCodeDialog extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
+
     private JTextPane editTP;
+
     private JCheckBox cbFragment;
     private JCheckBox cbPresenter;
     private JCheckBox cbContract;
     private JCheckBox cbModel;
     private JCheckBox cbApi;
+
     private JTextField tfKwClassName;
     private JTextField tfLayoutName;
+    private JCheckBox cbRecyclerView;
+    private JCheckBox cbAdapter;
     //    private JButton formatBtn;
 
     public GenerateCodeDialog(){}
@@ -56,6 +62,8 @@ public class GenerateCodeDialog extends JDialog {
         OptionsBean options = new OptionsBean();
         options.hasContract = cbContract.isSelected();
         options.hasFragment = cbFragment.isSelected();
+        options.hasRecyclerView = cbRecyclerView.isSelected();
+        options.hasAdapter = cbAdapter.isSelected();
         options.hasModel = cbModel.isSelected();
         options.hasPresenter = cbPresenter.isSelected();
         options.hasApi = cbApi.isSelected();

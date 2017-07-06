@@ -11,6 +11,7 @@ public interface TFragment {
     //%5$s:recyclerView初始化部分。
     //%6$s:error函数体。
     //%7$s:包名
+    //%8$s:含recyclerView响应体
     String CONTENT =
             "package %7$s;\n\n"+
                     "import android.os.Bundle;\n" +
@@ -93,7 +94,7 @@ public interface TFragment {
                     "\n" +
                     "    @Override\n" +
                     "    public void start(Object response) {\n" +
-                    "\n" +
+                    "%8$s\n" +
                     "    }\n" +
                     "\n" +
                     "    @Override\n" +
@@ -108,9 +109,8 @@ public interface TFragment {
     //%1$s:方法名关键字
     //%2$s:响应值与类型
     String RESPONSE_METHOD =
-            "\t@Override\n" +
-                    "    public void response%1$s(%2$s) {\n" +
-                    "        \n" +
-                    "    }\n";
+            "@Override\n" +
+                    "public void response%1$s(%2$s) {\n" +
+                    "}";
 
 }

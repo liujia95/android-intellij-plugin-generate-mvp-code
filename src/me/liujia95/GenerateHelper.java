@@ -1,6 +1,6 @@
 package me.liujia95;
 
-import me.liujia95.template.TApiService;
+import me.liujia95.bean.ConfigBean;
 
 /**
  * Created by Administrator on 2017/7/5 0005.

@@ -5,7 +5,7 @@ package me.liujia95.template;
  */
 public interface TJson {
 
-    String TEMP = "" +
+    String TEMP =
             "{\n" +
             "     \"kw_class_name\":\"类名关键字\",\n" +
             "     \"kw_method_name_list\":[{\n" +

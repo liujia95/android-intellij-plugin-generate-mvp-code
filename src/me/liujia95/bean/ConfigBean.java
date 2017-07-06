@@ -1,4 +1,4 @@
-package me.liujia95;
+package me.liujia95.bean;
 
 import java.util.List;
 

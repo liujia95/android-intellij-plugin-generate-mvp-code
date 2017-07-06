@@ -1,6 +1,6 @@
 package me.liujia95.generate;
 
-import me.liujia95.ConfigBean;
+import me.liujia95.bean.ConfigBean;
 import me.liujia95.GenerateHelper;
 import me.liujia95.template.TPresenter;
 
@@ -26,7 +26,6 @@ public class GeneratePresenterCode {
         for (int i = 0;i<bean.getKw_method_name_list().size();i++){
             sbMethod.append(spellMethod(bean.getKw_method_name_list().get(i)));
         }
-
         //%1$s:类名关键字
         //%2$s:请求函数体
         //%3$s:包名

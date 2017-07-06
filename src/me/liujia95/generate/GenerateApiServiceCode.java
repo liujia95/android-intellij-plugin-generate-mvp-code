@@ -1,7 +1,6 @@
 package me.liujia95.generate;
 
-import me.liujia95.ConfigBean;
-import me.liujia95.GenerateHelper;
+import me.liujia95.bean.ConfigBean;
 import me.liujia95.template.TApiService;
 
 /**
