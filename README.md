@@ -5,7 +5,7 @@
 0. *Preferences* -> *Plugins* -> *Install plugin from disk...*.
 
 ## Usage:
-![](http://i.imgur.com/tKZ7C5s.gif)
+![](https://github.com/liujia95/android-intellij-plugin-generate-mvp-code/blob/master/art/GIF.gif?raw=true)
 
 **json format:**
  ```json
