@@ -109,8 +109,8 @@ public interface TFragment {
     //%1$s:方法名关键字
     //%2$s:响应值与类型
     String RESPONSE_METHOD =
-            "@Override\n" +
-                    "public void response%1$s(%2$s) {\n" +
-                    "}";
+                    "   @Override\n" +
+                    "   public void response%1$s(%2$s) {\n" +
+                    "   }";
 
 }
